@@ -16,6 +16,10 @@ The application exposes the below three rest api's inorder to satisfy the busine
    URL:  http://localhost:8080/fa/getTransferenceList
    METHOD: GET
 
+4. Metadata api to get the general config data of the app.
+   URL:  http://localhost:8080/fa/getFAConfigDetails
+   METHOD: GET
+
 In order to deploy the application just run the class StartFinancialAdvisorApplication as a java application.
 
 In order to execute the rest api's please refer the postman collection file (Financial-Advisor.postman_collection.json) to run these services.
