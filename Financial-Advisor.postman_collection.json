@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "deaf0961-6545-40e3-b9b2-ad2439e89906",
+		"name": "Financial-Advisor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Risk Portfolios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0955c1bd-08ea-4cd0-bbf7-8345a313355e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/fa/riskportfolios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fa",
+						"riskportfolios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Risk Portfolios by Risk Level",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0955c1bd-08ea-4cd0-bbf7-8345a313355e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/fa/getPortfolioByRiskLevel?risklevel=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fa",
+						"getPortfolioByRiskLevel"
+					],
+					"query": [
+						{
+							"key": "risklevel",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transference Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0955c1bd-08ea-4cd0-bbf7-8345a313355e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"riskLevel\" : 5,\n\t\"funds\" : [\n\t\t{\n\t\t\t\"investCatId\" : 1, \n\t\t\t\"money\" : 0\n\t\t},\n\t\t{\n\t\t\t\"investCatId\" : 2, \n\t\t\t\"money\" : 200\n\t\t},\n\t\t{\n\t\t\t\"investCatId\" : 3, \n\t\t\t\"money\" : 0\n\t\t},\n\t\t{\n\t\t\t\"investCatId\" : 4, \n\t\t\t\"money\" : 200\n\t\t},\n\t\t{\n\t\t\t\"investCatId\" : 5, \n\t\t\t\"money\" : 200\n\t\t}\t\n\t]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/fa/getTransferenceList",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"fa",
+						"getTransferenceList"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

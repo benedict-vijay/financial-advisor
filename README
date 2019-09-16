@@ -1,0 +1,67 @@
+This project outlines a two part scenario wherein a customer gets a recommendation for an ideal portfolio, and then
+understands the steps needed to balance their current portfolio to match this ideal one
+
+Have developed this application using java, spring boot, spring data, HSQL DB and maven.
+The application exposes the below three rest api's inorder to satisfy the business requirements,
+
+1. Get all risk portfolios
+   URL:  http://localhost:8080/fa/riskportfolios
+   METHOD: GET
+
+2. Get rist portfolios by risklevel
+   URL:  http://localhost:8080/fa/getPortfolioByRiskLevel?risklevel=5
+   METHOD: GET
+
+3. Get the transference details
+   URL:  http://localhost:8080/fa/getTransferenceList
+   METHOD: GET
+
+In order to deploy the application just run the class StartFinancialAdvisorApplication as a java application.
+
+In order to execute the rest api's please refer the postman collection file (Financial-Advisor.postman_collection.json) to run these services.
+
+# Package design:
+All the packages are grouped under com.xyz.fa
+I am treating riskportfolio as one module under fa (fianancial-advisor). So tomorrow if we add new modules we can add the new packages to handle those.
+This way of packaging will make sure there will be zero package cycles.
+
+I have made sure that each package talks to the other packages through abstraction (interfaces) and not through specific implementation (concrete classes).
+
+
+#Assumptions:
+
+1. For simplicity sake I have chosen HSQL in-memory database to persist the needed Objects.
+2. Risk and Portfolio can be further segregated out into a separate classes. But I have kept the design flexible enough accomodate these changes if needed.
+
+# Due to the lack of time, I have not done the following which are very important in a production quality REST api's
+1. Have not added the REST layer authentication (OAUTH2)
+2. Have not added the log4j support for logging. Have only done logging using System.out.println(). In production we should not use sysout.
+   Also proper logging is very important for debugging production issues.
+3. Have not added the Open API support to the REST api's for documentation.
+4. Have not done the complete validation.
+5. For caching just using spring's default Cache provider. But in real time any powerful caching system can we integrated into this code without modifying the existing code.
+6. By default spring converts the thrown exception into json format and puts the http error code as 500. This is not the proper way to handle the exceptions.
+   In Spring Controller there are more advanced ways to handle exceptions by using the @ExceptionHandler. 
+   Also I have not set the proper HTTP Error code to the exception being thrown from the controller. 
+7. Have added unit test cases for only the core methods. Have not written unit test cases for all the lines/branches. So there might not be maximum code coverage.   
+
+#Time Taken:
+
+1. Requirement Analysis - 1 hr
+2. Data Modeling -> 2 hrs
+3. Setting up the skeleton of the spring boot project and loading the data in HSQL DB - 4 hrs
+4. Designing the JSON structure for the UI consumption and the object structure to store in cache - 3 hrs
+5. REST API implementation
+   a. Get all risk portfolios - 2 hrs
+   b. Get rist portfolios by risklevel - 1 hr
+   c. Get the transference details - 6 hrs
+6. Junit test cases - 3 hrs
+
+   
+   
+
+
+
+
+
+
