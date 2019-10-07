@@ -1,7 +1,10 @@
 package com.xyz.fa.riskportfolio.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +24,8 @@ import com.xyz.fa.riskportfolio.vo.RiskPortfolioFund;
 @RequestMapping("/fa")
 public class RiskPortfolioController {
 
+	private Map<String, Integer> clients = new HashMap<String, Integer>();
+	
 	@Autowired
 	private RiskPortfolioService riskPortfolioService;
 	
@@ -53,10 +58,20 @@ public class RiskPortfolioController {
      * @throws RiskPortfolioControllerException
      */
     @GetMapping("/getPortfolioByRiskLevel")
-    public RiskPortfolio getPortfolioByRiskLevel(@RequestParam("risklevel") int riskLevel) throws RiskPortfolioControllerException {
+    public RiskPortfolio getPortfolioByRiskLevel(@RequestParam("risklevel") int riskLevel, HttpServletRequest request) throws RiskPortfolioControllerException {
     	
     	try {
-        	return riskPortfolioService.getPortfolioByRiskLevel(riskLevel);
+    		RiskPortfolio portfolio = null;
+    		String custId = request.getHeader("custId");
+    		Integer count = clients.get(custId);
+    		
+    		if (count != null && count < 2) {
+    			portfolio = riskPortfolioService.getPortfolioByRiskLevel(riskLevel);
+    			clients.put(custId, count == null ? 0 : ++count);
+    		} else {
+    			throw new RiskPortfolioControllerException("Max Number of clients supported is 2", null);
+    		}
+        	return portfolio;
             
     	} catch (RiskPortfolioServiceException e) {
     		e.printStackTrace();
